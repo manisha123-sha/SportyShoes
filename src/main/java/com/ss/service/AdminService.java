@@ -13,11 +13,11 @@ public class AdminService {
 	private AdminRepository adminRepository;
 	
 	public Admin getAdmin(String username) {
-		return adminRepository.findByUsername(username);
+		return adminRepository.findById(username).get();
 	}
 
 	public boolean loginVerify(String username, String password) {
-		Admin admin = adminRepository.findByUsername(username);
+		Admin admin = adminRepository.findById(username).get();
         if (admin!= null && admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
             return true;
         }
@@ -26,7 +26,6 @@ public class AdminService {
 
 	public void updatePassword(Admin admin) {
 		adminRepository.save(admin);
-		
 	}
 
 }
